@@ -2,14 +2,22 @@ package com.hello.hellospring.service;
 
 import com.hello.hellospring.domain.Member;
 import com.hello.hellospring.repository.MemberRepository;
-import com.hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MemberService {
     //테스트 클래스 빠르게 만들기 : ctrl + shift + t
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    // 외부에서 넣어주도록 스프링 컨테이너에 있는 MemberService 를 주입해줌
+    @Autowired
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     //회원가입
     public Long join(Member member){
