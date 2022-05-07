@@ -4,8 +4,11 @@ import com.hello.hellospring.domain.Member;
 import com.hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 //스프링이 알게 해야 관리됨 @Controller @Service..라 해야 스프링이 컨테이너에 등록해줌
 // 스프링은 스프링 빈을 등록할 때 기본으로 싱글톤으로 등록한다. (하나만 등록)
@@ -33,8 +36,11 @@ public class MemberController {
         memberService.join(member);
         return "redirect:/";
     }
+    @GetMapping("/members")
+    public String findAll(Model model){
+        List<Member> memberList = memberService.findAll();
+        model.addAttribute("memberList",memberList);
+        return "/members/memberList";
+    }
 
 }
-// 스프링 빈을 등록하는 2가지 방법 (패키지 하위들만 적용)
-// 컴포넌트 스캔과 자동 의존관계 설정 @Component 어노테이션이 있으면 스프링 빈으로 자동등록 된다.
-// 자바 코드로 직접 스프링 빈 등록 SpringConfig 클래스 참고

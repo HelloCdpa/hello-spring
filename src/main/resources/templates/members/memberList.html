@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <!--model 값을 가져올 때 ${}-->
+        <tr th:each="member : ${memberList}">
+            <td th:text="${member.id}"></td>
+            <td th:text="${member.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
